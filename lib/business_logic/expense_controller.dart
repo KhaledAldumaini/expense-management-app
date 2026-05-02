@@ -1,3 +1,4 @@
+import 'package:expenses_manager/data/remote/dbfirebase_methods.dart';
 import 'package:flutter/material.dart';
 
 import '../data/local/sqldb.dart';
@@ -5,6 +6,10 @@ import '../data/models/expense_model.dart';
 
 class ExpenseController with ChangeNotifier {
   final SqlDb _sqlDb = SqlDb();
+  bool _isSyncing = false;
+  bool get isSyncing => _isSyncing;
+
+  final Databasemethods _firebaseDb = Databasemethods();
 
   Future<bool> addExpense(
     String title,
@@ -70,5 +75,35 @@ class ExpenseController with ChangeNotifier {
     return result[0]['total'] != null
         ? double.parse(result[0]['total'].toString())
         : 0.0;
+  }
+
+  Future<void> syncExpensesToCloud() async {
+    _isSyncing = true;
+    notifyListeners();
+
+    try {
+      List<Map> localExpenses = await getAllExpenses();
+
+      for (var expense in localExpenses) {
+        String docId = expense['id'].toString();
+
+        Map<String, dynamic> dataToUpload = {
+          "title": expense['title'],
+          "amount": expense['amount'],
+          "category": expense['category'],
+          "description": expense['description'],
+          "date": expense['date'],
+          "syncedAt": DateTime.now().toString(),
+        };
+
+        await _firebaseDb.addData(dataToUpload, docId, "user_expenses");
+      }
+    } catch (e) {
+      debugPrint("Sync Error: $e");
+      rethrow;
+    } finally {
+      _isSyncing = false;
+      notifyListeners();
+    }
   }
 }

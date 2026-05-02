@@ -15,6 +15,46 @@ class DashboardScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("الإحصائيات"),
         backgroundColor: Colors.green.shade700,
+        actions: [
+          Consumer<ExpenseController>(
+            builder: (context, controller, child) {
+              return IconButton(
+                icon: controller.isSyncing
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Icon(
+                        Icons.cloud_upload_outlined,
+                        color: Colors.white,
+                      ),
+                onPressed: controller.isSyncing
+                    ? null
+                    : () async {
+                        try {
+                          await controller.syncExpensesToCloud();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("تمت المزامنة السحابية بنجاح"),
+                              backgroundColor: Colors.blueAccent,
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("فشلت المزامنة، تحقق من اتصالك"),
+                            ),
+                          );
+                        }
+                      },
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

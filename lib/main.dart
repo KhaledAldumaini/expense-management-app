@@ -2,9 +2,13 @@ import 'package:expenses_manager/business_logic/expense_controller.dart';
 import 'package:expenses_manager/presentation/screens/main_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:expenses_manager/firebase_options.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
 
   runApp(
     ChangeNotifierProvider(
