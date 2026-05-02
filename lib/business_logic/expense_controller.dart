@@ -6,6 +6,7 @@ import '../data/models/expense_model.dart';
 
 class ExpenseController with ChangeNotifier {
   final SqlDb _sqlDb = SqlDb();
+  final Databasemethods _cloudDb = Databasemethods();
   bool _isSyncing = false;
   bool get isSyncing => _isSyncing;
 
@@ -105,5 +106,23 @@ class ExpenseController with ChangeNotifier {
       _isSyncing = false;
       notifyListeners();
     }
+  }
+
+  // budgets methods
+  Future<void> addBudgetCloud(Map<String, dynamic> budgetData) async {
+    String id = DateTime.now().millisecondsSinceEpoch
+        .toString(); // id for the cloud
+    await _cloudDb.addData(budgetData, id, "Budgets");
+  }
+
+  Future<void> updateBudgetCloud(
+    String id,
+    Map<String, dynamic> updatedData,
+  ) async {
+    await _cloudDb.updateData("Budgets", id, updatedData);
+  }
+
+  Future<void> deleteBudgetCloud(String id) async {
+    await _cloudDb.deleteData("Budgets", id);
   }
 }

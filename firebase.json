@@ -1,1 +1,37 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"expense-management-app-1d3e1","appId":"1:535424118627:android:02aefecbe030efa7c46d56","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"expense-management-app-1d3e1","configurations":{"android":"1:535424118627:android:02aefecbe030efa7c46d56","ios":"1:535424118627:ios:ccf50dba286bfdfec46d56","web":"1:535424118627:web:9409a7787e942443c46d56"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "expense-management-app-1d3e1",
+          "appId": "1:535424118627:android:02aefecbe030efa7c46d56",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "expense-management-app-1d3e1",
+          "configurations": {
+            "android": "1:535424118627:android:02aefecbe030efa7c46d56",
+            "ios": "1:535424118627:ios:ccf50dba286bfdfec46d56",
+            "web": "1:535424118627:web:9409a7787e942443c46d56"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

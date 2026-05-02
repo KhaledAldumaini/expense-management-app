@@ -1,46 +1,36 @@
-import 'package:expenses_manager/business_logic/expense_controller.dart';
-import 'package:expenses_manager/presentation/screens/main_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:expenses_manager/firebase_options.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'business_logic/expense_controller.dart';
+import 'presentation/screens/main_scaffold.dart';
+import 'presentation/screens/web_budget_entry.dart';
+import 'firebase_options.dart';
+import 'dart:io' show platform;
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ExpenseController(),
-      child: const ExpenseApp(),
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ExpenseController())],
+      child: const MyApp(),
     ),
   );
 }
 
-class ExpenseApp extends StatelessWidget {
-  const ExpenseApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Expense Manager',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        useMaterial3: true,
-        scaffoldBackgroundColor: Colors.grey.shade100,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      home: const MainScaffold(),
+      title: 'إدارة المصروفات الذكية',
+      theme: ThemeData(primarySwatch: Colors.green, useMaterial3: true),
+      home: kIsWeb ? const WebBudgetEntry() : const MainScaffold(),
     );
   }
 }
