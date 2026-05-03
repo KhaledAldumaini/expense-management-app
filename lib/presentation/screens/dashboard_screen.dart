@@ -13,7 +13,8 @@ class DashboardScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("الإحصائيات"),
+        title: const Text("الإحصائيات", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
         backgroundColor: Colors.green.shade700,
         actions: [
           Consumer<ExpenseController>(

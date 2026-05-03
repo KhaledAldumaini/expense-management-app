@@ -1,3 +1,4 @@
+import 'package:expenses_manager/presentation/screens/web_budget_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'dashboard_screen.dart';
@@ -12,7 +13,7 @@ class MainScaffold extends StatefulWidget {
 class _MainScaffoldState extends State<MainScaffold> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [const HomeScreen(), const DashboardScreen()];
+  final List<Widget> _pages = [const HomeScreen(), const DashboardScreen(), const WebBudgetDashboard()];
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +59,11 @@ class _MainScaffoldState extends State<MainScaffold> {
                 icon: Icon(Icons.pie_chart_outline_rounded),
                 activeIcon: Icon(Icons.pie_chart_rounded, size: 30),
                 label: 'الإحصائيات',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.pie_chart_outline_rounded),
+                activeIcon: Icon(Icons.pie_chart_rounded, size: 30),
+                label: 'الميزانيات',
               ),
             ],
           ),

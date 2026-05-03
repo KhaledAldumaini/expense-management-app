@@ -87,7 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expense Manager"),
+        title: const Text(
+          "مدير الصروفات",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green.shade700,
         centerTitle: true,
       ),
@@ -103,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("No Expenses Yet"));
+            return const Center(child: Text("لا توجد أي مصاريف"));
           }
 
           return ListView.builder(

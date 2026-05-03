@@ -28,8 +28,10 @@ class _WebBudgetEntryState extends State<WebBudgetEntry> {
           "مدير المصروفات",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        backgroundColor: const Color.fromARGB(255, 16, 32, 39),
+        centerTitle: true,
       ),
-
+      backgroundColor: const Color.fromARGB(255, 38, 50, 56),
       body: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 600),
@@ -39,6 +41,7 @@ class _WebBudgetEntryState extends State<WebBudgetEntry> {
             borderRadius: BorderRadius.circular(15),
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
           ),
+
           child: Form(
             key: _formKey,
             child: ListView(

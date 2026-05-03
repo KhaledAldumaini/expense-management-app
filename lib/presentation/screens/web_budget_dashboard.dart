@@ -17,10 +17,11 @@ class WebBudgetDashboard extends StatelessWidget {
           "لوحة تحكم الميزانيات السحابية",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.green.shade700,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color.fromARGB(255, 16, 32, 39),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        // استدعاء البيانات بشكل حي من مجموعة Budgets
         stream: FirebaseFirestore.instance.collection("Budgets").snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -102,7 +103,6 @@ class WebBudgetDashboard extends StatelessWidget {
                                 data,
                               ),
                             ),
-                            // زر الحذف (Delete)[cite: 5, 8]
                             IconButton(
                               icon: const Icon(
                                 Icons.delete_outline,
